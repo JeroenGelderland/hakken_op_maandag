@@ -11,8 +11,7 @@ with open('data.csv', newline='') as csvfile:
             continue
         else:
             if(row[0] != "src"):       
-                print(f"INSERT INTO `marktplaats_images` VALUES('{row[0]}'', {row[1]}, {row[2]}, {row[3]})")
-                db.execute(f"INSERT INTO `marktplaats_images` VALUES(\"{row[0]}\",\"{row[1]}\", \"{row[2]}\", \"{row[3]}\")")
+                db.execute(f"INSERT INTO `marktplaats_images` VALUES(\"{row[0]}\",\"{row[1]}\", \"{row[2]}\", \"{row[3]}\", \"{row[4]}\")")
 
     
 
