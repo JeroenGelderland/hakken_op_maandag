@@ -1,17 +1,57 @@
-from flask import Flask, render_template
-from flask_socketio import SocketIO
+from sys import modules
+import uuid
+from flask import Flask, render_template, jsonify
+from flask_socketio import SocketIO, emit
+from database import Database
+from uuid import uuid4
+import requests
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app)
+database = Database()
 
 
 @app.route("/")
 def index():
-    return render_template('index.html')
+    moodboards = database.query('SELECT * FROM `moodboard`')
+    return render_template('index.html', **locals())
 
-@socketio.on('connection')
-def connection():
+@app.route("/features")
+def features():
+    return jsonify(database.query('SELECT * FROM `marktplaats_images`'))    
+
+@socketio.on('request-recommendations')
+def recommend(moodboard_id):
+
+    results = database.query(f"SELECT * FROM `image` WHERE `board` = {moodboard_id}")
+
+    images = []
+
+    for image in results:
+        images.append(image['image'])
+
+    data = {"images" : images}
+
+    requests.post('http://192.168.1.97:5000', json=data)
+    pass
+
+@socketio.on('create-new-moodboard')
+def create_new_moodboard(moodboard):
+    query_list = []
+
+    moodboard_id = uuid4()
+    query_list.append(f"INSERT INTO `moodboard` VALUES({moodboard_id}, {moodboard['name']})")
+    
+    for file in moodboard["files"]:
+        query_list.append(f"INSERT INTO `image` VALUES({moodboard_id}, {uuid4()},{file})")
+    
+    database.execute(query_list)
+    emit('new-moodboard-confirmed', {"id" : moodboard_id, "name" : moodboard['name']})
+
+
+@socketio.on('connect')
+def connect():
     print('user connected')
 
 if __name__ == '__main__':
