@@ -9,7 +9,6 @@
     <link rel="preconnect"                 href="https://fonts.googleapis.com" />
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700&display=swap" />
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}" />
-    
 
     <meta name="theme-color"                content="#FFCC24" />
     <meta name="msapplication-TileColor"    content="#FFCC24" />
@@ -18,11 +17,20 @@
                                               <title>Mood Market</title>
   </head>
   <body>
+    <div class="modal" id="modal-create-new-moodboard">
+      <button class="uie close" type="button">&times;</button>
+      <h2>New moodboard</h2>
+      <div class="heading">Pick a name</div>
+      <input class="uie" type="text" name="new-moodboard-name" />
+      <div class="heading">Images</div>
+      <input class="uie" type="file" name="new-moodboard-files" accept="image/x-png" multiple />
+      <button class="uie" type="submit">Done</button>
+    </div>
     <header>
       <div>
         <h1>Mood Market</h1>
         <div id="login">
-          <button>Login with Pinterest</button>
+          <button class="uie">Login with Pinterest</button>
         </div>
       </div>
     </header>
@@ -43,7 +51,11 @@
                 </div>
               </div>
             </div>
-            <button for="modal-create-moodboard">Of cre&euml;er er nog een</button>
+            <button class="uie" type="button" for="modal-create-new-moodboard">Or create a new one</button>
+          </div>
+          <div id="filters" class="controls">
+            <div class="heading">Filters</div>
+            <span>By relevance</span><span>By price</span><span>By date</span>
           </div>
         </div>
         <div id="results" class="window">
@@ -52,7 +64,7 @@
             <div class="basics">
               <img src="https://i.pinimg.com/originals/02/73/76/027376630add67eaeca0b3f770a62b18.jpg" alt="Naam" />
             </div>
-            <h3 class="name">Naam</h3>
+            <!-- <h3 class="name">Naam</h3>
             <div class="pricing">
               <div class="ask">Asking price: <span>&euro;10,-</span></div>
               <div class="ask">No asking price</div>
@@ -76,131 +88,12 @@
                   </td>
                 </tr>
               </table>
-            </div>
-          </a>
-          <a href="#" class="template">
-            <div class="basics">
-              <img src="https://i.pinimg.com/originals/02/73/76/027376630add67eaeca0b3f770a62b18.jpg" alt="Naam" />
-            </div>
-            <h3 class="name">Naam</h3>
-            <div class="pricing">
-              <div class="ask">Asking price: <span>&euro;10,-</span></div>
-              <div class="ask">No asking price</div>
-              <div class="bid">Highest bid: <span>&euro;10,-</span></div>
-            </div>
-            <div class="details">
-              <table>
-                <tr>
-                  <th>Materiaal</th>
-                  <td id="material">Materiaal</td>
-                </tr>
-                <tr>
-                  <th>Conditie</th>
-                  <td id="condition">Conditie</td>
-                </tr>
-                <tr>
-                  <th>Locatie</th>
-                  <td>
-                    <div id="location">Locatie</div>
-                    <div id="handover">Handover</div>
-                  </td>
-                </tr>
-              </table>
-            </div>
-          </a>
-          <a href="#" class="template">
-            <div class="basics">
-              <img src="https://i.pinimg.com/originals/02/73/76/027376630add67eaeca0b3f770a62b18.jpg" alt="Naam" />
-            </div>
-            <h3 class="name">Naam</h3>
-            <div class="pricing">
-              <div class="ask">Asking price: <span>&euro;10,-</span></div>
-              <div class="ask">No asking price</div>
-              <div class="bid">Highest bid: <span>&euro;10,-</span></div>
-            </div>
-            <div class="details">
-              <table>
-                <tr>
-                  <th>Materiaal</th>
-                  <td id="material">Materiaal</td>
-                </tr>
-                <tr>
-                  <th>Conditie</th>
-                  <td id="condition">Conditie</td>
-                </tr>
-                <tr>
-                  <th>Locatie</th>
-                  <td>
-                    <div id="location">Locatie</div>
-                    <div id="handover">Handover</div>
-                  </td>
-                </tr>
-              </table>
-            </div>
-          </a>
-          <a href="#" class="template">
-            <div class="basics">
-              <img src="https://i.pinimg.com/originals/02/73/76/027376630add67eaeca0b3f770a62b18.jpg" alt="Naam" />
-            </div>
-            <h3 class="name">Naam</h3>
-            <div class="pricing">
-              <div class="ask">Asking price: <span>&euro;10,-</span></div>
-              <div class="ask">No asking price</div>
-              <div class="bid">Highest bid: <span>&euro;10,-</span></div>
-            </div>
-            <div class="details">
-              <table>
-                <tr>
-                  <th>Materiaal</th>
-                  <td id="material">Materiaal</td>
-                </tr>
-                <tr>
-                  <th>Conditie</th>
-                  <td id="condition">Conditie</td>
-                </tr>
-                <tr>
-                  <th>Locatie</th>
-                  <td>
-                    <div id="location">Locatie</div>
-                    <div id="handover">Handover</div>
-                  </td>
-                </tr>
-              </table>
-            </div>
-          </a>
-          <a href="#" class="template">
-            <div class="basics">
-              <img src="https://i.pinimg.com/originals/02/73/76/027376630add67eaeca0b3f770a62b18.jpg" alt="Naam" />
-            </div>
-            <h3 class="name">Naam</h3>
-            <div class="pricing">
-              <div class="ask">Asking price: <span>&euro;10,-</span></div>
-              <div class="ask">No asking price</div>
-              <div class="bid">Highest bid: <span>&euro;10,-</span></div>
-            </div>
-            <div class="details">
-              <table>
-                <tr>
-                  <th>Materiaal</th>
-                  <td id="material">Materiaal</td>
-                </tr>
-                <tr>
-                  <th>Conditie</th>
-                  <td id="condition">Conditie</td>
-                </tr>
-                <tr>
-                  <th>Locatie</th>
-                  <td>
-                    <div id="location">Locatie</div>
-                    <div id="handover">Handover</div>
-                  </td>
-                </tr>
-              </table>
-            </div>
+            </div> -->
           </a>
         </div>
       </section>
     </main>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.0/socket.io.min.js"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}"></script>
   </body>
 </html>
