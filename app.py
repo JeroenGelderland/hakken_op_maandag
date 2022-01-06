@@ -38,16 +38,16 @@ def recommend(moodboard_id):
 
 @socketio.on('create-new-moodboard')
 def create_new_moodboard(moodboard):
-    query_list = []
-
     moodboard_id = uuid4()
+
+    query_list = []
     query_list.append(f"INSERT INTO `moodboard` VALUES({moodboard_id}, {moodboard['name']})")
-    
+
     for file in moodboard['files']:
         query_list.append(f"INSERT INTO `image` VALUES({moodboard_id}, {uuid4()}, {file})")
     
     database.execute(query_list)
-    emit('new-moodboard-confirmed', { 'id': moodboard_id, 'name': moodboard['name'] })
+    emit('new-moodboard-confirmed', { 'id': str(moodboard_id), 'name': moodboard['name'] })
 
 @socketio.on('connect')
 def connect():
