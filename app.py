@@ -33,21 +33,26 @@ def recommend(moodboard_id):
 
     data = {"images" : images}
 
+    
     requests.post('http://192.168.1.97:5000', json=data)
     pass
 
 @socketio.on('create-new-moodboard')
 def create_new_moodboard(moodboard):
+    print(moodboard)
     query_list = []
 
     moodboard_id = uuid4()
-    query_list.append(f"INSERT INTO `moodboard` VALUES({moodboard_id}, {moodboard['name']})")
+
+    print('=' * 30)
+    print(f"INSERT INTO `moodboard` VALUES(\"{moodboard_id}\", \"{moodboard['name']}\")")
+    database.execute(f"INSERT INTO `moodboard` VALUES(\"{moodboard_id}\", \"{moodboard['name']}\")")
     
     for file in moodboard["files"]:
-        query_list.append(f"INSERT INTO `image` VALUES({moodboard_id}, {uuid4()},{file})")
+        print(f"INSERT INTO `image` VALUES(\"{moodboard_id}\", \"{uuid4()}\",\"{file}\")")
+        database.execute(f"INSERT INTO `image` VALUES(\"{moodboard_id}\", \"{uuid4()}\",\"b'{file}\")")
     
-    database.execute(query_list)
-    emit('new-moodboard-confirmed', {"id" : moodboard_id, "name" : moodboard['name']})
+    emit('new-moodboard-confirmed', {"id" : str(moodboard_id), "name" : moodboard['name']})
 
 
 @socketio.on('connect')
